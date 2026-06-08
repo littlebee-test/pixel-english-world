@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="像素英语">
+    <meta name="theme-color" content="#5D9E3A">
+    <meta name="description" content="Minecraft风格的儿童英语学习应用">
+    <!-- 基础路径（GitHub Pages子路径部署时需要，可根据实际情况修改） -->
+    <!-- <base href="/pixel-english-world/"> -->
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS 图标 -->
+    <link rel="apple-touch-icon" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192x192.png">
+    
+    <title>像素英语世界 - Minecraft风格英语学习</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app" class="ipad-frame">
+        <!-- 页面容器 -->
+        <div class="page-container">
+            
+            <!-- ========== 1. 首页主菜单 ========== -->
+            <div id="page-home" class="page active">
+                <div class="home-bg">
+                    <div class="pixel-sky"></div>
+                    <div class="pixel-clouds">
+                        <div class="cloud cloud1"></div>
+                        <div class="cloud cloud2"></div>
+                        <div class="cloud cloud3"></div>
+                    </div>
+                    <div class="pixel-grass"></div>
+                </div>
+                
+                <!-- 设置按钮 -->
+                <button class="settings-btn" onclick="showSettings()">
+                    <span class="gear-icon">⚙</span>
+                </button>
+                
+                <!-- 标题 -->
+                <div class="game-title">
+                    <h1 class="pixel-title">像素英语世界</h1>
+                    <p class="subtitle">Minecraft Style English Learning</p>
+                </div>
+                
+                <!-- 功能分区 -->
+                <div class="menu-sections">
+                    <!-- 背单词模块 -->
+                    <div class="menu-section">
+                        <h2 class="section-title green">📚 背单词</h2>
+                        <div class="menu-buttons">
+                            <button class="pixel-btn wood-btn" onclick="navigateTo('page-levels', 'toddler')">
+                                <span class="btn-icon">👶</span>
+                                <span class="btn-text">幼儿启蒙</span>
+                            </button>
+                            <button class="pixel-btn wood-btn" onclick="navigateTo('page-levels', 'mcgame')">
+                                <span class="btn-icon">🎮</span>
+                                <span class="btn-text">MC游戏</span>
+                            </button>
+                            <button class="pixel-btn wood-btn" onclick="navigateTo('page-levels', 'textbook')">
+                                <span class="btn-icon">📖</span>
+                                <span class="btn-text">教材同步</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 拼句子模块 -->
+                    <div class="menu-section">
+                        <h2 class="section-title purple">🧩 拼句子</h2>
+                        <div class="menu-buttons">
+                            <button class="pixel-btn purple-btn" onclick="navigateTo('page-levels', 'sentence300')">
+                                <span class="btn-icon">💬</span>
+                                <span class="btn-text">常用300句</span>
+                            </button>
+                            <button class="pixel-btn purple-btn" onclick="navigateTo('page-levels', 'words1000')">
+                                <span class="btn-icon">📝</span>
+                                <span class="btn-text">小学1000词</span>
+                            </button>
+                            <button class="pixel-btn purple-btn" onclick="navigateTo('page-levels', 'sen-textbook')">
+                                <span class="btn-icon">📚</span>
+                                <span class="btn-text">教材同步</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 快速入口：单词合成台 -->
+                <div class="quick-access">
+                    <button class="pixel-btn gold-btn large-btn" onclick="navigateTo('page-craft')">
+                        <span class="btn-icon">⚗️</span>
+                        <span class="btn-text">单词合成台</span>
+                    </button>
+                </div>
+                
+                <!-- 添加到主屏幕提示 -->
+                <div class="add-to-home" id="addToHomeTip">
+                    <div class="tip-content">
+                        <span class="tip-icon">📱</span>
+                        <span class="tip-text">点击分享按钮 → "添加到主屏幕"，体验更佳！</span>
+                        <button class="tip-close" onclick="closeAddTip()">×</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== 2. 关卡地图页 ========== -->
+            <div id="page-levels" class="page">
+                <div class="levels-bg"></div>
+                
+                <button class="back-btn pixel-btn" onclick="goBack()">
+                    <span>← 返回</span>
+                </button>
+                
+                <h2 class="levels-title">🎮 MC游戏单词关卡</h2>
+                
+                <div class="levels-list">
+                    <div class="level-item" onclick="navigateTo('page-words')">
+                        <div class="level-icon grass">🌿</div>
+                        <div class="level-info">
+                            <h3>新手草原</h3>
+                            <p>基础单词 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                                <span class="progress-text">30/30 ⭐</span>
+                            </div>
+                        </div>
+                        <div class="level-arrow">▶</div>
+                    </div>
+                    
+                    <div class="level-item" onclick="navigateTo('page-words')">
+                        <div class="level-icon village">🏫</div>
+                        <div class="level-info">
+                            <h3>学校村庄</h3>
+                            <p>校园词汇 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                                <span class="progress-text">18/30</span>
+                            </div>
+                        </div>
+                        <div class="level-arrow">▶</div>
+                    </div>
+                    
+                    <div class="level-item" onclick="navigateTo('page-words')">
+                        <div class="level-icon farm">🌾</div>
+                        <div class="level-info">
+                            <h3>家庭农场</h3>
+                            <p>家庭与动物 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                                <span class="progress-text">9/30</span>
+                            </div>
+                        </div>
+                        <div class="level-arrow">▶</div>
+                    </div>
+                    
+                    <div class="level-item" onclick="navigateTo('page-words')">
+                        <div class="level-icon market">🏪</div>
+                        <div class="level-info">
+                            <h3>集市广场</h3>
+                            <p>购物与食物 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                                <span class="progress-text">0/30</span>
+                            </div>
+                        </div>
+                        <div class="level-arrow">▶</div>
+                    </div>
+                    
+                    <div class="level-item locked">
+                        <div class="level-icon forest">🌲</div>
+                        <div class="level-info">
+                            <h3>游戏森林</h3>
+                            <p>游戏术语 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                                <span class="progress-text">🔒 未解锁</span>
+                            </div>
+                        </div>
+                        <div class="level-lock">🔒</div>
+                    </div>
+                    
+                    <div class="level-item locked">
+                        <div class="level-icon lake">💧</div>
+                        <div class="level-info">
+                            <h3>情感湖泊</h3>
+                            <p>情绪与感受 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                                <span class="progress-text">🔒 未解锁</span>
+                            </div>
+                        </div>
+                        <div class="level-lock">🔒</div>
+                    </div>
+                    
+                    <div class="level-item locked">
+                        <div class="level-icon hill">⚒️</div>
+                        <div class="level-info">
+                            <h3>工具台丘陵</h3>
+                            <p>工具与材料 · 30个</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                                <span class="progress-text">🔒 未解锁</span>
+                            </div>
+                        </div>
+                        <div class="level-lock">🔒</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== 3. MC游戏单词分类页 ========== -->
+            <div id="page-words" class="page">
+                <div class="words-bg"></div>
+                
+                <button class="back-btn pixel-btn" onclick="goBack()">
+                    <span>← 返回</span>
+                </button>
+                
+                <h2 class="words-title">🎮 MC游戏单词</h2>
+                
+                <div class="words-grid">
+                    <div class="word-card" onclick="showWordDetail('Block', '方块', '🧱')">
+                        <div class="word-image block">🧱</div>
+                        <div class="word-text">
+                            <span class="word-en">Block</span>
+                            <span class="word-cn">方块</span>
+                        </div>
+                    </div>
+                    
+                    <div class="word-card" onclick="showWordDetail('Enemy', '生物', '👾')">
+                        <div class="word-image enemy">👾</div>
+                        <div class="word-text">
+                            <span class="word-en">Enemy</span>
+                            <span class="word-cn">敌对生物</span>
+                        </div>
+                    </div>
+                    
+                    <div class="word-card" onclick="showWordDetail('Animal', '动物', '🐑')">
+                        <div class="word-image animal">🐑</div>
+                        <div class="word-text">
+                            <span class="word-en">Animal</span>
+                            <span class="word-cn">动物</span>
+                        </div>
+                    </div>
+                    
+                    <div class="word-card" onclick="showWordDetail('Color', '颜色', '🎨')">
+                        <div class="word-image color">🎨</div>
+                        <div class="word-text">
+                            <span class="word-en">Color</span>
+                            <span class="word-cn">颜色</span>
+                        </div>
+                    </div>
+                    
+                    <div class="word-card" onclick="showWordDetail('Food', '食物', '🍎')">
+                        <div class="word-image food">🍎</div>
+                        <div class="word-text">
+                            <span class="word-en">Food</span>
+                            <span class="word-cn">食物</span>
+                        </div>
+                    </div>
+                    
+                    <div class="word-card" onclick="showWordDetail('Material', '材料', '💎')">
+                        <div class="word-image material">💎</div>
+                        <div class="word-text">
+                            <span class="word-en">Material</span>
+                            <span class="word-cn">材料</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部控制栏 -->
+                <div class="control-bar">
+                    <button class="ctrl-btn green active" onclick="setDisplayMode('cn')">
+                        <span>显示中文</span>
+                    </button>
+                    <button class="ctrl-btn blue" onclick="setDisplayMode('en')">
+                        <span>显示英文</span>
+                    </button>
+                    <button class="ctrl-btn yellow" onclick="setDisplayMode('auto')">
+                        <span>自动模式</span>
+                    </button>
+                    <button class="ctrl-btn purple" onclick="startTest()">
+                        <span>测试练习</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ========== 4. 单词合成台 ========== -->
+            <div id="page-craft" class="page">
+                <div class="craft-bg"></div>
+                
+                <button class="back-btn pixel-btn" onclick="goBack()">
+                    <span>← 返回</span>
+                </button>
+                
+                <!-- 顶部标签 -->
+                <div class="craft-tabs">
+                    <button class="tab-btn active" onclick="switchCraftTab('daily')">每日挑战</button>
+                    <button class="tab-btn" onclick="switchCraftTab('free')">自由合成</button>
+                </div>
+                
+                <div class="craft-container">
+                    <!-- 左侧：合成区 -->
+                    <div class="craft-area">
+                        <!-- 目标单词 -->
+                        <div class="target-word-card">
+                            <span class="target-label">🎯 今日目标</span>
+                            <div class="target-word">
+                                <span class="target-en">energy</span>
+                                <span class="target-cn">能量</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 合成槽 -->
+                        <div class="craft-slots">
+                            <div class="craft-slot" id="slot1" ondragover="allowDrop(event)" ondrop="dropWord(event, 1)">
+                                <span class="slot-placeholder">拖入单词</span>
+                            </div>
+                            <div class="plus-sign">+</div>
+                            <div class="craft-slot" id="slot2" ondragover="allowDrop(event)" ondrop="dropWord(event, 2)">
+                                <span class="slot-placeholder">拖入单词</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 合成按钮 -->
+                        <button class="craft-btn pixel-btn gold-btn" id="craftButton" onclick="craftWords()" disabled>
+                            <span>⚗️ 合成</span>
+                        </button>
+                        
+                        <!-- 提示按钮 -->
+                        <button class="hint-btn pixel-btn" onclick="showHint()">
+                            <span>💡 提示</span>
+                        </button>
+                        
+                        <!-- 合成历史 -->
+                        <div class="craft-history">
+                            <h4>📜 合成记录</h4>
+                            <div class="history-list" id="historyList">
+                                <div class="history-item">尝试 1: fire + water = ?</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧：我的词库 -->
+                    <div class="word-library">
+                        <h3>📚 我的词库</h3>
+                        
+                        <input type="text" class="search-box" placeholder="搜索单词..." id="wordSearch" oninput="filterWords()">
+                        
+                        <div class="category-tabs">
+                            <button class="cat-btn active" onclick="filterCategory('all')">全部</button>
+                            <button class="cat-btn" onclick="filterCategory('item')">物品</button>
+                            <button class="cat-btn" onclick="filterCategory('action')">动作</button>
+                            <button class="cat-btn" onclick="filterCategory('feature')">特征</button>
+                            <button class="cat-btn" onclick="filterCategory('relation')">关系</button>
+                            <button class="cat-btn" onclick="filterCategory('helper')">辅助</button>
+                        </div>
+                        
+                        <div class="library-grid" id="libraryGrid">
+                            <!-- 单词卡片将通过JS生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 合成结果弹窗 -->
+                <div class="modal" id="craftResultModal">
+                    <div class="modal-content craft-result">
+                        <div class="result-icon success">✨</div>
+                        <h2>匹配目标单词！</h2>
+                        <div class="result-word">
+                            <span class="result-en">energy</span>
+                            <span class="result-cn">能量</span>
+                        </div>
+                        <div class="craft-logic">
+                            <p><strong>合成逻辑：</strong></p>
+                            <p>fire (火) + light (光) = energy (能量)</p>
+                            <p class="logic-explain">火与光结合产生能量，就像火把照亮黑夜，也像熔岩散发的光和热！</p>
+                        </div>
+                        <div class="result-buttons">
+                            <button class="pixel-btn green-btn" onclick="addToLibrary()">📥 添加到词库</button>
+                            <button class="pixel-btn gold-btn" onclick="closeCraftResult()">✅ 完成挑战</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== 5. 拼句子玩法页 ========== -->
+            <div id="page-sentence" class="page">
+                <div class="sentence-bg"></div>
+                
+                <button class="close-btn pixel-btn" onclick="goBack()">
+                    <span>✕</span>
+                </button>
+                
+                <!-- 顶部进度条 -->
+                <div class="sentence-progress">
+                    <div class="progress-bar large">
+                        <div class="progress-fill" style="width: 20%"></div>
+                        <span class="progress-text">6/30</span>
+                    </div>
+                </div>
+                
+                <!-- 场景插画区 -->
+                <div class="scene-area">
+                    <div class="scene-illustration">
+                        <!-- MC风格场景 -->
+                        <div class="mc-scene">
+                            <div class="mc-sky"></div>
+                            <div class="mc-sun">☀️</div>
+                            <div class="mc-cloud c1">☁️</div>
+                            <div class="mc-cloud c2">☁️</div>
+                            <div class="mc-grass"></div>
+                            <div class="mc-steve">🧑‍🌾</div>
+                            <div class="mc-flower f1">🌸</div>
+                            <div class="mc-flower f2">🌼</div>
+                            <div class="mc-flower f3">🌺</div>
+                        </div>
+                    </div>
+                    <div class="sentence-hint">
+                        <p class="hint-text">看图片，拼出正确的句子：</p>
+                        <p class="hint-cn">多么美好的一天啊！</p>
+                    </div>
+                </div>
+                
+                <!-- 句子拼接区 -->
+                <div class="sentence-build-area">
+                    <div class="sentence-slots" id="sentenceSlots">
+                        <div class="sentence-slot" data-pos="0"></div>
+                        <div class="sentence-slot" data-pos="1"></div>
+                        <div class="sentence-slot" data-pos="2"></div>
+                        <div class="sentence-slot" data-pos="3"></div>
+                        <div class="sentence-slot end" data-pos="4">!</div>
+                    </div>
+                </div>
+                
+                <!-- 单词块区域 -->
+                <div class="word-blocks-area">
+                    <div class="word-blocks" id="wordBlocks">
+                        <div class="word-block" draggable="true" data-word="What" data-correct="0" onclick="placeWord(this)">
+                            <span>What</span>
+                        </div>
+                        <div class="word-block" draggable="true" data-word="a" data-correct="1" onclick="placeWord(this)">
+                            <span>a</span>
+                        </div>
+                        <div class="word-block" draggable="true" data-word="beautiful" data-correct="2" onclick="placeWord(this)">
+                            <span>beautiful</span>
+                        </div>
+                        <div class="word-block" draggable="true" data-word="day" data-correct="3" onclick="placeWord(this)">
+                            <span>day</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部操作栏 -->
+                <div class="sentence-controls">
+                    <button class="ctrl-btn yellow" onclick="showSentenceHint()">
+                        <span>💡 提示</span>
+                    </button>
+                    <button class="ctrl-btn blue" onclick="resetSentence()">
+                        <span>🔄 重置</span>
+                    </button>
+                    <button class="ctrl-btn green" onclick="checkSentence()">
+                        <span>✅ 检查</span>
+                    </button>
+                    <button class="ctrl-btn purple" onclick="nextSentence()">
+                        <span>⏭ 下一题</span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- 设置弹窗 -->
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <h2>⚙️ 设置</h2>
+                <div class="setting-item">
+                    <label>🔊 音效</label>
+                    <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="setting-item">
+                    <label>🎵 背景音乐</label>
+                    <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="setting-item">
+                    <label>🔔 每日提醒</label>
+                    <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="setting-item">
+                    <label>📱 自动播放发音</label>
+                    <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <button class="pixel-btn green-btn" onclick="closeSettings()">确定</button>
+            </div>
+        </div>
+        
+        <!-- 单词详情弹窗 -->
+        <div class="modal" id="wordDetailModal">
+            <div class="modal-content word-detail">
+                <div class="detail-icon" id="detailIcon">🧱</div>
+                <h2 id="detailWordEn">Block</h2>
+                <p id="detailWordCn">方块</p>
+                <div class="word-phonetic">/blɒk/</div>
+                <div class="word-example">
+                    <p><strong>例句：</strong></p>
+                    <p class="example-en">This is a grass block.</p>
+                    <p class="example-cn">这是一个草方块。</p>
+                </div>
+                <button class="pixel-btn sound-btn">🔊 播放发音</button>
+                <button class="pixel-btn close-modal-btn" onclick="closeWordDetail()">关闭</button>
+            </div>
+        </div>
+        
+        <!-- 成功提示弹窗 -->
+        <div class="modal" id="successModal">
+            <div class="modal-content success-modal">
+                <div class="success-icon">🎉</div>
+                <h2>太棒了！</h2>
+                <p>你回答正确！</p>
+                <button class="pixel-btn gold-btn" onclick="closeSuccess()">继续</button>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        // 注册 Service Worker (PWA支持)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(function(registration) {
+                        console.log('PWA: Service Worker 注册成功，范围:', registration.scope);
+                        
+                        // 检测更新
+                        registration.addEventListener('updatefound', function() {
+                            console.log('PWA: 发现新版本');
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('PWA: Service Worker 注册失败:', error);
+                    });
+            });
+        }
+        
+        // 检测是否可以添加到主屏幕
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('PWA: 可以添加到主屏幕');
+            // 可以在这里显示"添加到主屏幕"的提示
+        });
+    </script>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
