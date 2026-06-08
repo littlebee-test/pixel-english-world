@@ -6,13 +6,16 @@
 const CACHE_NAME = 'pixel-english-world-v1.0';
 const CACHE_VERSION = 'v1.0';
 
+// 子路径部署前缀（GitHub Pages 子路径部署时修改）
+const BASE_PREFIX = '/pixel-english-world';
+
 // 需要缓存的核心资源
 const CORE_RESOURCES = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
-  '/manifest.json'
+  BASE_PREFIX + '/',
+  BASE_PREFIX + '/index.html',
+  BASE_PREFIX + '/css/styles.css',
+  BASE_PREFIX + '/js/app.js',
+  BASE_PREFIX + '/manifest.json'
 ];
 
 // 安装阶段 - 缓存核心资源
@@ -87,7 +90,7 @@ self.addEventListener('fetch', function(event) {
       }).catch(function() {
         // 网络失败时，如果是HTML请求，返回首页
         if (request.headers.get('accept').includes('text/html')) {
-          return caches.match('/index.html');
+          return caches.match(BASE_PREFIX + '/index.html');
         }
         return null;
       });
